@@ -79,7 +79,7 @@ fun FActive(
 @Composable
 fun FActiveLaunchedEffect(
    vararg keys: Any?,
-   block: suspend CoroutineScope.(active: Boolean) -> Unit,
+   block: suspend CoroutineScope.(isActive: Boolean) -> Unit,
 ) {
    val blockUpdated by rememberUpdatedState(block)
    val isActive = fIsActive()
