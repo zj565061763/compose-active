@@ -41,7 +41,9 @@ fun FActiveLifecycle(
 
    DisposableEffect(lifecycleOwner, minActiveState) {
       val observer = LifecycleEventObserver { _, event ->
-         lifecycleActive = event.targetState.isAtLeast(minActiveState)
+         if (event != Lifecycle.Event.ON_ANY) {
+            lifecycleActive = event.targetState.isAtLeast(minActiveState)
+         }
       }
       lifecycleOwner.lifecycle.addObserver(observer)
       onDispose {
