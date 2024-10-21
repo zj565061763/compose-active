@@ -87,3 +87,19 @@ fun FActiveLaunchedEffect(
       blockUpdated(isActive)
    }
 }
+
+/**
+ * 至少激活过一次，才会显示[content]
+ */
+@Composable
+fun FActiveAtLeastOnce(
+   content: @Composable () -> Unit,
+) {
+   val isActive = fIsActive()
+   var hasActive by remember { mutableStateOf(isActive) }
+
+   if (hasActive || isActive) {
+      hasActive = true
+      content()
+   }
+}
