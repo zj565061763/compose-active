@@ -93,6 +93,7 @@ fun FActiveLaunchedEffect(
  */
 @Composable
 fun FActiveAtLeastOnce(
+   default: @Composable () -> Unit = {},
    content: @Composable () -> Unit,
 ) {
    val isActive = fIsActive()
@@ -101,5 +102,7 @@ fun FActiveAtLeastOnce(
    if (hasActive || isActive) {
       hasActive = true
       content()
+   } else {
+      default()
    }
 }
