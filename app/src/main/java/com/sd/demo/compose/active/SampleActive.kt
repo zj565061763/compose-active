@@ -27,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sd.demo.compose.active.theme.AppTheme
 import com.sd.lib.compose.active.FActive
-import com.sd.lib.compose.active.FActiveLaunchedEffect
 import com.sd.lib.compose.active.FActiveLifecycle
 import com.sd.lib.compose.active.fIsActive
 
@@ -46,10 +45,6 @@ class SampleActive : ComponentActivity() {
 
 @Composable
 private fun Content() {
-   FActiveLaunchedEffect { active ->
-      logMsg { "FActiveLaunchedEffect active:$active" }
-   }
-
    Box(
       modifier = Modifier
          .fillMaxSize()

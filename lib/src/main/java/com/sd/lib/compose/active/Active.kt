@@ -3,17 +3,14 @@ package com.sd.lib.compose.active
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import kotlinx.coroutines.CoroutineScope
 
 private val LocalActive = compositionLocalOf<Boolean?> { null }
 
@@ -70,21 +67,6 @@ fun FActive(
 
    CompositionLocalProvider(LocalActive provides finalActive) {
       content()
-   }
-}
-
-/**
- * 当[keys]或者当前位置的激活状态发生变化时，会触发[block]
- */
-@Composable
-fun FActiveLaunchedEffect(
-   vararg keys: Any?,
-   block: suspend CoroutineScope.(isActive: Boolean) -> Unit,
-) {
-   val blockUpdated by rememberUpdatedState(block)
-   val isActive = fIsActive()
-   LaunchedEffect(isActive, *keys) {
-      blockUpdated(isActive)
    }
 }
 
