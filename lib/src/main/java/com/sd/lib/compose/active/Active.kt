@@ -52,9 +52,13 @@ inline fun FActive(
       hasActive = true
    } else {
       if (hasActive) {
-         // 此处不把inactiveTimeout当作key，只取发起LaunchedEffect时的值
-         LaunchedEffect(Unit) {
-            delay(inactiveTimeout)
+         if (inactiveTimeout > 0) {
+            // 此处不把inactiveTimeout当作key，只取发起LaunchedEffect时的值
+            LaunchedEffect(Unit) {
+               delay(inactiveTimeout)
+               hasActive = false
+            }
+         } else {
             hasActive = false
          }
       }
