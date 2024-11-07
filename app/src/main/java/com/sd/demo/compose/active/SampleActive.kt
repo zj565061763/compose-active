@@ -4,15 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,8 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.sd.demo.compose.active.theme.AppTheme
 import com.sd.lib.compose.active.FActive
 import com.sd.lib.compose.active.fIsActive
@@ -34,9 +31,7 @@ class SampleActive : ComponentActivity() {
       super.onCreate(savedInstanceState)
       setContent {
          AppTheme {
-            FActive(true) {
-               Content()
-            }
+            Content()
          }
       }
    }
@@ -44,16 +39,16 @@ class SampleActive : ComponentActivity() {
 
 @Composable
 private fun Content() {
-   Box(
-      modifier = Modifier
-         .fillMaxSize()
-         .padding(10.dp)
-   ) {
-      StateBox(text = "1", activeColor = Color.Green) {
-         StateBox(text = "2", activeColor = Color.Red) {
-            StateBox(text = "3", activeColor = Color.Blue) {
-               StateBox(text = "4", activeColor = Color.Yellow) {
-                  StateBox(activeColor = Color.Cyan)
+   FActive(true) {
+      Box(
+         modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+      ) {
+         StateBox(text = "1", activeColor = Color.Red) {
+            StateBox(text = "2", activeColor = Color.Red) {
+               StateBox(text = "3", activeColor = Color.Red) {
+                  ContentBox()
                }
             }
          }
@@ -70,30 +65,67 @@ private fun StateBox(
 ) {
    var checked by remember { mutableStateOf(false) }
 
-   Column(
+   ConstraintLayout(
       modifier = modifier
          .fillMaxSize()
-         .border(2.dp, if (fIsActive()) activeColor else Color.Gray)
-         .padding(10.dp),
-      horizontalAlignment = Alignment.CenterHorizontally,
+         .padding(vertical = 48.dp, horizontal = 16.dp)
    ) {
-      Row(
-         modifier = Modifier.fillMaxWidth(),
-         verticalAlignment = Alignment.CenterVertically,
-         horizontalArrangement = Arrangement.Center,
-      ) {
-         Text(text = text)
-         if (child != null) {
-            Spacer(modifier = Modifier.width(10.dp))
-            Switch(checked = checked, onCheckedChange = { checked = it })
+      val (refBorder, refText, refSwitch, refChild) = createRefs()
+
+      Box(
+         modifier = Modifier
+            .constrainAs(refBorder) {
+               width = Dimension.matchParent
+               height = Dimension.matchParent
+
+            }
+            .border(2.dp, if (fIsActive()) activeColor else Color.Gray)
+      )
+
+      Switch(
+         checked = checked,
+         onCheckedChange = { checked = it },
+         modifier = Modifier.constrainAs(refSwitch) {
+            top.linkTo(refBorder.top)
+            bottom.linkTo(refBorder.top)
+            centerHorizontallyTo(parent)
          }
-      }
+      )
+
+      Text(
+         text = text,
+         modifier = Modifier.constrainAs(refText) {
+            centerVerticallyTo(refSwitch)
+            end.linkTo(refSwitch.start, 8.dp)
+         }
+      )
 
       if (child != null) {
-         FActive(active = checked) {
-            child()
+         FActive(checked) {
+            Box(modifier = Modifier.constrainAs(refChild) {
+               width = Dimension.matchParent
+               height = Dimension.matchParent
+            }) {
+               child()
+            }
          }
       }
+   }
+}
+
+@Composable
+private fun ContentBox(
+   modifier: Modifier = Modifier,
+) {
+   Box(
+      modifier = modifier.fillMaxSize(),
+      contentAlignment = Alignment.Center,
+   ) {
+      Text(
+         text = "content",
+         fontWeight = FontWeight.Bold,
+         color = if (fIsActive()) Color.Red else Color.Gray,
+      )
    }
 }
 
