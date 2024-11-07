@@ -27,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sd.demo.compose.active.theme.AppTheme
 import com.sd.lib.compose.active.FActive
-import com.sd.lib.compose.active.FActiveLifecycle
 import com.sd.lib.compose.active.fIsActive
 
 class SampleActive : ComponentActivity() {
@@ -35,7 +34,7 @@ class SampleActive : ComponentActivity() {
       super.onCreate(savedInstanceState)
       setContent {
          AppTheme {
-            FActiveLifecycle {
+            FActive(true) {
                Content()
             }
          }
