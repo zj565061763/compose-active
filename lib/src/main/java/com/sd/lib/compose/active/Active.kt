@@ -40,7 +40,7 @@ fun FSetActive(
  * 激活状态才会加载[content]，当状态由激活变为未激活时，过[inactiveTimeout]毫秒才会移除[content]
  */
 @Composable
-fun FActive(
+inline fun FActive(
    inactiveTimeout: Long = 0,
    default: @Composable () -> Unit = {},
    content: @Composable () -> Unit,
@@ -71,7 +71,7 @@ fun FActive(
  * 至少激活过一次，才会加载[content]
  */
 @Composable
-fun FActiveAtLeastOnce(
+inline fun FActiveAtLeastOnce(
    default: @Composable () -> Unit = {},
    content: @Composable () -> Unit,
 ) {
