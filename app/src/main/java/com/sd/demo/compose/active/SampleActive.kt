@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.sd.demo.compose.active.theme.AppTheme
-import com.sd.lib.compose.active.FActive
+import com.sd.lib.compose.active.FSetActive
 import com.sd.lib.compose.active.fIsActive
 
 class SampleActive : ComponentActivity() {
@@ -39,7 +39,7 @@ class SampleActive : ComponentActivity() {
 
 @Composable
 private fun Content() {
-   FActive(true) {
+   FSetActive(true) {
       Box(
          modifier = Modifier
             .fillMaxSize()
@@ -101,7 +101,7 @@ private fun StateBox(
       )
 
       if (child != null) {
-         FActive(checked) {
+         FSetActive(checked) {
             Box(modifier = Modifier.constrainAs(refChild) {
                width = Dimension.matchParent
                height = Dimension.matchParent

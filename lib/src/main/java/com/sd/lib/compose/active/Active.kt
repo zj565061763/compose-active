@@ -22,7 +22,7 @@ fun fIsActive(): Boolean {
  * 根据[active]决定[content]是否处于激活状态
  */
 @Composable
-fun FActive(
+fun FSetActive(
    active: Boolean,
    content: @Composable () -> Unit,
 ) {
