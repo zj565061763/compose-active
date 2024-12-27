@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.sd.demo.compose.active.theme.AppTheme
 import com.sd.lib.compose.active.FActiveContent
+import com.sd.lib.compose.active.FActiveOnceContent
 import com.sd.lib.compose.active.FSetActive
 
 class SampleActiveContent : ComponentActivity() {
@@ -44,6 +45,7 @@ private fun Content(
     )
     FSetActive(active) {
       ActiveContent()
+      ActiveOnceContent()
     }
   }
 }
@@ -54,5 +56,13 @@ private fun ActiveContent() {
     getActiveTimeout = { 1_000 },
     default = { Text(text = "default") },
     content = { Text(text = "content") },
+  )
+}
+
+@Composable
+private fun ActiveOnceContent() {
+  FActiveOnceContent(
+    default = { Text(text = "active once default") },
+    content = { Text(text = "active once content") },
   )
 }
