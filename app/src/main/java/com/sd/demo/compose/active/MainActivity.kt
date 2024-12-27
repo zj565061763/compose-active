@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
         Content(
           listActivity = listOf(
             SampleActive::class.java,
+            SampleActiveContent::class.java,
             SampleActivePager::class.java,
           ),
           onClickActivity = {
