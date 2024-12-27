@@ -17,7 +17,7 @@ private val LocalActive = compositionLocalOf<Boolean?> { null }
  */
 @Composable
 fun fIsActive(): Boolean {
-   return checkNotNull(LocalActive.current) { "Not in FActive scope." }
+  return checkNotNull(LocalActive.current) { "Not in active scope." }
 }
 
 /**
@@ -25,15 +25,14 @@ fun fIsActive(): Boolean {
  */
 @Composable
 fun FSetActive(
-   active: Boolean,
-   content: @Composable () -> Unit,
+  active: Boolean,
+  content: @Composable () -> Unit,
 ) {
-   val localActive = LocalActive.current
-   val finalActive = if (localActive == null) active else (active && localActive)
-
-   CompositionLocalProvider(LocalActive provides finalActive) {
-      content()
-   }
+  val localActive = LocalActive.current
+  val finalActive = if (localActive == null) active else (active && localActive)
+  CompositionLocalProvider(LocalActive provides finalActive) {
+    content()
+  }
 }
 
 /**
@@ -41,34 +40,34 @@ fun FSetActive(
  */
 @Composable
 inline fun FActive(
-   inactiveTimeout: Long = 0,
-   default: @Composable () -> Unit = {},
-   content: @Composable () -> Unit,
+  inactiveTimeout: Long = 0,
+  default: @Composable () -> Unit = {},
+  content: @Composable () -> Unit,
 ) {
-   val isActive = fIsActive()
-   var hasActive by remember { mutableStateOf(isActive) }
+  val isActive = fIsActive()
+  var hasActive by remember { mutableStateOf(isActive) }
 
-   if (isActive) {
-      hasActive = true
-   } else {
-      if (hasActive) {
-         if (inactiveTimeout > 0) {
-            // 此处不把inactiveTimeout当作key，只取发起LaunchedEffect时的值
-            LaunchedEffect(Unit) {
-               delay(inactiveTimeout)
-               hasActive = false
-            }
-         } else {
-            hasActive = false
-         }
+  if (isActive) {
+    hasActive = true
+  } else {
+    if (hasActive) {
+      if (inactiveTimeout > 0) {
+        // 此处不把inactiveTimeout当作key，只取发起LaunchedEffect时的值
+        LaunchedEffect(Unit) {
+          delay(inactiveTimeout)
+          hasActive = false
+        }
+      } else {
+        hasActive = false
       }
-   }
+    }
+  }
 
-   if (hasActive) {
-      content()
-   } else {
-      default()
-   }
+  if (hasActive) {
+    content()
+  } else {
+    default()
+  }
 }
 
 /**
@@ -76,16 +75,16 @@ inline fun FActive(
  */
 @Composable
 inline fun FActiveAtLeastOnce(
-   default: @Composable () -> Unit = {},
-   content: @Composable () -> Unit,
+  default: @Composable () -> Unit = {},
+  content: @Composable () -> Unit,
 ) {
-   val isActive = fIsActive()
-   var hasActive by remember { mutableStateOf(isActive) }
+  val isActive = fIsActive()
+  var hasActive by remember { mutableStateOf(isActive) }
 
-   if (hasActive || isActive) {
-      hasActive = true
-      content()
-   } else {
-      default()
-   }
+  if (hasActive || isActive) {
+    hasActive = true
+    content()
+  } else {
+    default()
+  }
 }

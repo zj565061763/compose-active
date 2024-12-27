@@ -14,42 +14,42 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 @Composable
 fun <T> StateFlow<T>.fCollectAsStateWithActive(
-   context: CoroutineContext = EmptyCoroutineContext,
+  context: CoroutineContext = EmptyCoroutineContext,
 ): State<T> {
-   @SuppressLint("StateFlowValueCalledInComposition")
-   val initialValue = this.value
-   return collectAsStateWithActive(
-      initialValue = initialValue,
-      context = context,
-   )
+  @SuppressLint("StateFlowValueCalledInComposition")
+  val initialValue = this.value
+  return collectAsStateWithActive(
+    initialValue = initialValue,
+    context = context,
+  )
 }
 
 @Composable
 fun <T> Flow<T>.fCollectAsStateWithActive(
-   initialValue: T,
-   context: CoroutineContext = EmptyCoroutineContext,
+  initialValue: T,
+  context: CoroutineContext = EmptyCoroutineContext,
 ): State<T> {
-   return collectAsStateWithActive(
-      initialValue = initialValue,
-      context = context,
-   )
+  return collectAsStateWithActive(
+    initialValue = initialValue,
+    context = context,
+  )
 }
 
 @Composable
 private fun <T> Flow<T>.collectAsStateWithActive(
-   initialValue: T,
-   context: CoroutineContext = EmptyCoroutineContext,
+  initialValue: T,
+  context: CoroutineContext = EmptyCoroutineContext,
 ): State<T> {
-   val flow = this
-   return remember { mutableStateOf(initialValue) }.also { state ->
-      if (fIsActive()) {
-         LaunchedEffect(flow, context) {
-            if (context == EmptyCoroutineContext) {
-               flow.collect { state.value = it }
-            } else withContext(context) {
-               flow.collect { state.value = it }
-            }
-         }
+  val flow = this
+  return remember { mutableStateOf(initialValue) }.also { state ->
+    if (fIsActive()) {
+      LaunchedEffect(flow, context) {
+        if (context == EmptyCoroutineContext) {
+          flow.collect { state.value = it }
+        } else withContext(context) {
+          flow.collect { state.value = it }
+        }
       }
-   }
+    }
+  }
 }
