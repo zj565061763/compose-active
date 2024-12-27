@@ -36,7 +36,7 @@ fun FSetActive(
 }
 
 /**
- * 激活状态才会加载[content]，当状态由激活变为未激活时，过[inactiveTimeout]毫秒才会移除[content]
+ * 激活状态才会加载[content]，当状态由激活变为未激活时，过[inactiveTimeout]毫秒后移除[content]
  */
 @Composable
 inline fun FActive(
