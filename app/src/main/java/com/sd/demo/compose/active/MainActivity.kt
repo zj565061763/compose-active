@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
         Content(
           listActivity = listOf(
             SampleActive::class.java,
+            SampleActivePager::class.java,
           ),
           onClickActivity = {
             startActivity(Intent(this, it))

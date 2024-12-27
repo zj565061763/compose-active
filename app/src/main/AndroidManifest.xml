@@ -23,6 +23,7 @@
         </activity>
 
         <activity android:name=".SampleActive" />
+        <activity android:name=".SampleActivePager" />
 
     </application>
 
