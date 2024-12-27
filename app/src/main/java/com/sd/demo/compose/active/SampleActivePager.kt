@@ -37,7 +37,7 @@ class SampleActivePager : ComponentActivity() {
 private fun Content(
   modifier: Modifier = Modifier,
 ) {
-  val state = rememberPagerState { 5 }
+  val state = rememberPagerState { 100 }
   HorizontalPager(
     modifier = modifier.fillMaxSize(),
     state = state,
