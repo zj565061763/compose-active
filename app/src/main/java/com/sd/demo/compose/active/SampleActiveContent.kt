@@ -3,7 +3,6 @@ package com.sd.demo.compose.active
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Switch
@@ -16,7 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.sd.demo.compose.active.theme.AppTheme
-import com.sd.lib.compose.active.FActive
+import com.sd.lib.compose.active.FActiveContent
 import com.sd.lib.compose.active.FSetActive
 
 class SampleActiveContent : ComponentActivity() {
@@ -51,18 +50,14 @@ private fun Content(
 }
 
 @Composable
-private fun ActiveContent(
-  modifier: Modifier = Modifier,
-) {
-  Box(modifier = modifier) {
-    FActive(
-      getActiveTimeout = { 1_000 },
-      default = {
-        Text(text = "default")
-      },
-      content = {
-        Text(text = "content")
-      },
-    )
-  }
+private fun ActiveContent() {
+  FActiveContent(
+    getActiveTimeout = { 1_000 },
+    default = {
+      Text(text = "default")
+    },
+    content = {
+      Text(text = "content")
+    },
+  )
 }
