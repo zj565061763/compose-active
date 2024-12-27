@@ -48,8 +48,8 @@ private fun Content(
       }
     },
     snapPosition = SnapPosition.Center,
-  ) { index ->
-    state.FSetActivePage(index) {
+  ) { page ->
+    state.FSetActivePage(page) {
       PageContent()
     }
   }
