@@ -9,7 +9,7 @@ import androidx.compose.runtime.setValue
 import kotlinx.coroutines.delay
 
 /**
- * 激活状态才会加载[content]，当状态由激活变为未激活时，过[getActiveTimeout]毫秒后移除[content]
+ * 激活状态显示[content]，当状态由激活变为未激活时，过[getActiveTimeout]毫秒后显示[default]
  */
 @Composable
 inline fun FActiveContent(
@@ -44,10 +44,10 @@ inline fun FActiveContent(
 }
 
 /**
- * 至少激活过一次，才会加载[content]
+ * 激活过一次，就会一直显示[content]
  */
 @Composable
-inline fun FActiveAtLeastOnce(
+inline fun FActiveOnceContent(
   default: @Composable () -> Unit = {},
   content: @Composable () -> Unit,
 ) {
