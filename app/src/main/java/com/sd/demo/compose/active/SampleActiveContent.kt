@@ -56,7 +56,7 @@ private fun ActiveContent(
 ) {
   Box(modifier = modifier) {
     FActive(
-      getInactiveTimeout = { 1_000 },
+      getActiveTimeout = { 1_000 },
       default = {
         Text(text = "default")
       },

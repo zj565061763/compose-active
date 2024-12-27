@@ -36,11 +36,11 @@ fun FSetActive(
 }
 
 /**
- * 激活状态才会加载[content]，当状态由激活变为未激活时，过[getInactiveTimeout]毫秒后移除[content]
+ * 激活状态才会加载[content]，当状态由激活变为未激活时，过[getActiveTimeout]毫秒后移除[content]
  */
 @Composable
 inline fun FActive(
-  getInactiveTimeout: () -> Long = { 0 },
+  getActiveTimeout: () -> Long = { 0 },
   default: @Composable () -> Unit = {},
   content: @Composable () -> Unit,
 ) {
@@ -51,7 +51,7 @@ inline fun FActive(
     hasActive = true
   } else {
     if (hasActive) {
-      val timeout = getInactiveTimeout()
+      val timeout = getActiveTimeout()
       if (timeout > 0) {
         LaunchedEffect(Unit) {
           delay(timeout)
