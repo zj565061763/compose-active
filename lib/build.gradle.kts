@@ -6,7 +6,7 @@ plugins {
 
 val libGroupId = "com.sd.lib.android"
 val libArtifactId = "compose-active"
-val libVersion = "1.2.5"
+val libVersion = "1.3.0"
 
 android {
   namespace = "com.sd.lib.compose.active"
