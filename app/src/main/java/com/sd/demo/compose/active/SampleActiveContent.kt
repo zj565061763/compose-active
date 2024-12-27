@@ -34,7 +34,6 @@ private fun Content(
   modifier: Modifier = Modifier,
 ) {
   var active by remember { mutableStateOf(false) }
-
   Column(
     modifier = modifier.fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -53,11 +52,7 @@ private fun Content(
 private fun ActiveContent() {
   FActiveContent(
     getActiveTimeout = { 1_000 },
-    default = {
-      Text(text = "default")
-    },
-    content = {
-      Text(text = "content")
-    },
+    default = { Text(text = "default") },
+    content = { Text(text = "content") },
   )
 }
