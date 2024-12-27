@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import com.sd.demo.compose.active.theme.AppTheme
-import com.sd.lib.compose.active.FSetActivePage
+import com.sd.lib.compose.active.FSetActivePager
 import com.sd.lib.compose.active.fIsActive
 import kotlin.math.roundToInt
 
@@ -49,7 +49,7 @@ private fun Content(
     },
     snapPosition = SnapPosition.Center,
   ) { page ->
-    state.FSetActivePage(page) {
+    FSetActivePager(state, page) {
       PageContent()
     }
   }

@@ -8,14 +8,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
 @Composable
-fun PagerState.FSetActivePage(
+fun FSetActivePager(
+  state: PagerState,
   page: Int,
   content: @Composable () -> Unit,
 ) {
   var active by remember { mutableStateOf(false) }
 
-  if (!isScrollInProgress) {
-    active = currentPage == page
+  if (!state.isScrollInProgress) {
+    active = page == state.currentPage
   }
 
   FSetActive(
