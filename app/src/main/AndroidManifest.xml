@@ -25,6 +25,7 @@
         <activity android:name=".SampleActive" />
         <activity android:name=".SampleActiveContent" />
         <activity android:name=".SampleActivePager" />
+        <activity android:name=".SampleActiveFlow" />
 
     </application>
 

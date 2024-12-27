@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
             SampleActive::class.java,
             SampleActiveContent::class.java,
             SampleActivePager::class.java,
+            SampleActiveFlow::class.java,
           ),
           onClickActivity = {
             startActivity(Intent(this, it))
