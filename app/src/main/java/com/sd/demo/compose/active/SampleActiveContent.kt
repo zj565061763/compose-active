@@ -62,7 +62,7 @@ private fun ActiveContent() {
 @Composable
 private fun ActiveOnceContent() {
   FActiveOnceContent(
-    default = { Text(text = "active once default") },
-    content = { Text(text = "active once content") },
+    default = { Text(text = "default") },
+    content = { Text(text = "content") },
   )
 }
