@@ -54,7 +54,7 @@ private fun Content(
 @Composable
 private fun ActiveContent() {
   val flow = remember {
-    (1..Int.MAX_VALUE).asFlow().onEach { delay(1_000) }
+    (1..Int.MAX_VALUE).asFlow().onEach { delay(500) }
   }
   val data by flow.fCollectAsStateWithActive(0)
   Text(text = data.toString())
